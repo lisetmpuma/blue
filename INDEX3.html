@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> EL FORMULARIO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
+    
+<style>
+
+    h3{
+        margin: 0px;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+    body {
+			background: linear-gradient(to bottom, #ccbffa, #886fe4); /* Color degradado de fondo */
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+       }
+    
+    form {
+      width: 700px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 0 auto;
+	    padding: 20px;
+	    background-color: #d3c8fa;
+	    border-radius: 10px;
+    }
+  
+
+    label {
+      width: 120px;
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+      width: 200px;
+      margin-bottom: 10px;
+      border-radius: 10 px;
+    }
+  
+    .form-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+  
+    .form-row label {
+      margin-right: 10px;
+    }
+  
+    .form-row input[type="radio"] {
+      margin-right: 5px;
+    }
+  
+    .form-row select {
+      width: 205px;
+    }
+    .form-r {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+  
+    .form-r label {
+      margin-right: 5px;
+      width: 70px;
+    }
+
+    .form-r i {
+      margin-left: 45px;
+      margin-right: 5px;
+    }
+  
+    .button-row {
+        display: flex;
+        justify-content: center;
+        width: 700px;
+        gap: 20px;    
+    }
+
+    .form-row.button-row button {
+        background-color: rgb(38, 38, 150); 
+        color: rgb(245, 242, 242);     
+    }
+
+    .limpiar-button {
+        margin-right: 50px;      
+    }
+
+    .enviar-button {
+          margin-left: 50px;
+        }  
+    .form-row.city-row label {
+      margin-right: 40px;
+    }
+    
+    .form-row.requerimiento-row {
+      margin-left: 130px;
+      width: 95%;
+      align-items: baseline;  
+    }
+    
+    .form-row.requerimiento-row label {
+      margin-top: 5px;
+      display: none;  
+    }
+    
+    .form-row.requerimiento-row textarea {
+      width: calc(100% - 120px);
+    }
+
+    
+
+  </style>
+
+<script>
+        function limpiar(){
+        document.getElementsByName("nombre")[0].value = "";
+        document.getElementsByName("apellidos")[0].value = "";
+        document.getElementsByName("sexo")[0].checked = false;
+        document.getElementsByName("sexo")[1].checked = false;
+        document.getElementsByName("correo")[0].value = "";
+        document.getElementsByName("direccion")[0].value = "";
+        document.getElementsByName("ciudad")[0].selectedIndex = 0;
+        document.getElementsByName("requerimiento")[0].value = "";
+        }
+
+    function validarNombre_apellido(){
+        let nombre = document.getElementsByName("nombre")[0].value;
+        const v=nombre.trim();
+        const va = /^[a-zA-Z\s]+$/;
+        
+        a=va.test(nombre);
+        
+        if(!a){
+            return false;
+        }
+        return true;
+    }
+
+    function validarapellido(){
+        let apellidos = document.getElementsByName("apellidos")[0].value;
+        const v=apellidos.trim();
+        const va = /^[a-zA-Z\s]+$/;
+        
+        a=va.test(apellidos);
+        
+        if(!a){
+            return false;
+        }
+        return true;
+    }
+
+    function validarSexo(){
+        const sexo= document.querySelectorAll('input[name="sexo"]');
+        for(let i = 0; i < sexo.length; i++){
+            if(sexo[i].checked){
+                return true;
+            }
+        }    
+        return false;
+    }
+
+
+    function validarCorreo(correo){
+        const dividirdominio=correo.substring(correo.lastIndexOf('@')+1);
+        if(dividirdominio==='unsa.edu.pe'){return true;}
+        else{return false;}
+    }
+
+
+    function validarCiudad(){
+        const ciudad = document.getElementsByName("ciudad")[0].value;
+        if(ciudad === ""){
+            return false;
+        }
+        return true;
+    }
+
+    function enviar(){
+
+    let correo = document.getElementsByName("correo")[0].value;
+
+    if(!validarNombre_apellido()){
+        alert("ERROR en Nombre");
+        return false;
+    }
+    if(!validarapellido()){
+        alert("ERROR  Apellidos");
+        return false;
+    }
+    if(!validarSexo()){
+        alert("ERROR Sexo no indicado"); 
+        return false;
+    }
+    if(!validarCorreo(correo)){
+        alert("ERROR en correo"); 
+        return false;
+    }
+    if(!validarCiudad()){
+        alert("ERROR seleccionar  Ciudad");
+        return false;
+    }
+    alert(Date());
+    limpiar();
+
+    }
+
+</script>
+  
+  <form>
+    <h3>FORMULARIO ESTUDIANTES</h3>
+
+    <div class="form-row">
+      <label>Nombre:</label>
+      <input type="text" ID="nombre" name="nombre">
+    </div>
+  
+    <div class="form-row">
+      <label>Apellido:</label>
+      <input type="text" ID="apellidos" name="apellidos">
+    </div>
+  
+    <div class="form-row">
+      <label>Sexo:</label>
+      <div>
+        <input type="radio" name="sexo" value="femenino">F
+        <input type="radio" name="sexo" value="masculino">M
+      </div>
+    </div>
+  
+    <div class="form-r">
+      <label>Email:</label>
+      <i class="fa-regular fa-at"></i>
+      <input type="text" name="correo">
+    </div>
+  
+    <div class="form-row">
+      <label>Direccion:</label>
+      <input type="text" name="direccion">
+
+      <label style="margin-right: 20px;">Ciudad:</label>
+      <select name="ciudad">
+        <option value="" selected></option>
+        <option value="ciudad1">Cusco</option>
+        <option value="ciudad2">Arequipa</option>
+        <option value="ciudad3">Lima</option>
+        <option value="ciudad4">Puno</option>
+    </select><br>
+    </div>
+  
+    <div class="form-row requerimiento-row">
+      <label>Requerimiento:</label>
+      <textarea name="requerimiento" rows="4" cols="30" placeholder="requerimiento"></textarea>
+    </div>
+  
+    <div class="form-row button-row">
+        <button type="button" onclick="limpiar()">Limpiar</button>
+        <button type="button" onclick="enviar()">Enviar</button>
+            
+    </div>
+  </form>
+  
